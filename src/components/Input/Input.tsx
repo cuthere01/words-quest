@@ -9,11 +9,17 @@ interface InputProps {
     onInput: (e: React.FormEvent<HTMLInputElement>) => void;
     ref?: ForwardedRef<HTMLInputElement>;
     isCorrect: boolean;
+    isError: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ value, onKeyDown, onInput, isCorrect }, ref) => {
-    //const inputRef = useRef<HTMLInputElement>(null);
-
+const Input = forwardRef<HTMLInputElement, InputProps>(
+    ({
+         value,
+         onKeyDown,
+         onInput,
+         isCorrect,
+         isError
+     }, ref) => {
     return (
         <input
             type="text"
@@ -23,7 +29,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ value, onKeyDown, onIn
             onInput={onInput}
             ref={ref}
             className={cn(styles.input, {
-                [styles.correct]: isCorrect
+                [styles.correct]: isCorrect,
+                [styles.error]: isError
             })}
         />
     );

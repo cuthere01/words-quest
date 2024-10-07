@@ -1,3 +1,9 @@
 $primary: #3286a8;
 $darken: darken($primary, 5%);
+$focus: desaturate(lighten($primary, 42%), 20%);
+$focus-darken: darken($focus, 7%);
 $black: #555;
+$green: #ceeccb;
+$green-darken: darken($green, 7%);
+$red: #eccbcb;
+$red-darken: darken($red, 7%);

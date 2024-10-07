@@ -13,6 +13,7 @@ interface WordProps {
 const Word: React.FC<WordProps> = ({ answer, question, lettersMap, correctWord }) => {
     const [letters, setLetters] = useState<string[]>(Array(answer.length).fill(''));
     const [isCorrect, setIsCorrect] = useState<boolean>(false);
+    const [isError, setIsError] = useState<boolean>(false);
 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const nums: number[] = [];
@@ -87,6 +88,9 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap, correctWord }
         if(letters.join('') === answer.toUpperCase()) {
             correctWord(answer.toUpperCase());
             setIsCorrect(true);
+        } else {
+            setIsError(true);
+            setTimeout(() => setIsError(false), 300);
         }
     };
 
@@ -100,6 +104,7 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap, correctWord }
                             onKeyDown={(e): void => handleKeyDown(e, index)}
                             onInput={(e): void => handleInput(e, index)}
                             isCorrect={isCorrect}
+                            isError={isError}
                             ref={(el): void => { inputsRef.current[index] = el; }}
                         />
                         <span>{nums[index] ?? '*'}</span>

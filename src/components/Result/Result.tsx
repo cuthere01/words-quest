@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./Result.module.scss";
 import cn from 'classnames';
 
@@ -26,6 +26,16 @@ const Result: React.FC<ResultProps> = ({ result, lettersMap, correctWords }) => 
     const [letters, setLetters] = useState<string[]>(parseResult());
     const [letterStatus, setLetterStatus] = useState<number[]>(Array(letters.length).fill(0));
 
+    useEffect(() => {
+        setLetterStatus(prevLetterStatus =>
+            prevLetterStatus.map((ls, i) => {
+                // Проверяем, есть ли буква в correctWords
+                const isCorrect = correctWords.some(cw => cw.includes(letters[i]));
+                return isCorrect ? 1 : ls;
+            })
+        );
+    }, [correctWords, letters]);
+
     return (
         <div className={styles.result}>
             {letters.map((letter, index): JSX.Element => (
@@ -40,7 +50,6 @@ const Result: React.FC<ResultProps> = ({ result, lettersMap, correctWords }) => 
                     }
                 </div>
             ))}
-            <p>{correctWords}</p>
         </div>
     );
 };
