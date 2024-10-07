@@ -1,0 +1,43 @@
+@import './variables';
+
+*,body,h1,h2,h3,h4,h5,h6,p,span,a,li{
+    font-family: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    background: #fff;
+    margin: 0;
+}
+
+body,#comments_list {
+    &::-webkit-scrollbar {
+        width: 0.75rem;
+        background-color: #E5E5E5;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 0.75rem;
+        background-color: $primary;
+        cursor: pointer;
+    }
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        background-color: #E5E5E5;
+    }
+}
+
+
+@media screen and (min-width: 1540px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+@media (max-width: 768px) {
+
+}
+

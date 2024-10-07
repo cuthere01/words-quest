@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.scss';
+import Word from "./components/Word/Word";
+import data from './data/data';
 
-function App() {
+function App() : JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className={styles.app}>
+        <div className="container">
+            <p>#5</p>
+            <input type="text"/>
+            <div className={styles.words}>
+                {data.words.map((w, i) => {
+                    return <Word key={i} answer={w.answer} question={w.question} lettersMap={data.lettersMap} />;
+                })}
+            </div>
+        </div>
+    </section>
   );
 }
 
