@@ -1,5 +1,6 @@
 import React, { forwardRef, ForwardedRef } from 'react';
 import styles from './Input.module.scss';
+import cn from 'classnames';
 
 interface InputProps {
     value: string;
@@ -7,9 +8,10 @@ interface InputProps {
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     onInput: (e: React.FormEvent<HTMLInputElement>) => void;
     ref?: ForwardedRef<HTMLInputElement>;
+    isCorrect: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ value, onKeyDown, onInput }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ value, onKeyDown, onInput, isCorrect }, ref) => {
     //const inputRef = useRef<HTMLInputElement>(null);
 
     return (
@@ -19,9 +21,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ value, onKeyDown, onIn
             value={value}
             onKeyDown={onKeyDown}
             onInput={onInput}
-            //onChange={(e): void => { e.target.value.toUpperCase(); } }
-            ref={ref} // Используем переданный ref
-            className={styles.input}
+            ref={ref}
+            className={cn(styles.input, {
+                [styles.correct]: isCorrect
+            })}
         />
     );
 });

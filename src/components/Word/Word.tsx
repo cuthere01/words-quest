@@ -1,15 +1,19 @@
 import React, { useState, useRef } from 'react';
 import Input from "../Input/Input";
 import styles from "./Word.module.scss";
+import result from "../Result/Result";
 
 interface WordProps {
     answer: string;
     question: string;
     lettersMap: { [key: string]: number };
+    correctWord: (result: string) => void;
 }
 
-const Word: React.FC<WordProps> = ({ answer, question, lettersMap }) => {
+const Word: React.FC<WordProps> = ({ answer, question, lettersMap, correctWord }) => {
     const [letters, setLetters] = useState<string[]>(Array(answer.length).fill(''));
+    const [isCorrect, setIsCorrect] = useState<boolean>(false);
+
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const nums: number[] = [];
 
@@ -33,8 +37,6 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap }) => {
                 inputsRef.current[index + 1]?.focus();
             }
         }
-
-        console.log('onkeydown');
 
         // Навигация по стрелкам
         if (e.key === 'ArrowRight') {
@@ -70,7 +72,6 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap }) => {
         }
 
         const inputValue = e.currentTarget.value;
-        console.log('oninput');
         if (inputValue.length === 1 && inputValue.match(/^\p{L}$/u)) {
             const newLetters = [...letters];
             newLetters[index] = inputValue.toUpperCase();
@@ -79,6 +80,13 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap }) => {
             if (index < answer.length - 1) {
                 inputsRef.current[index + 1]?.focus();
             }
+        }
+    };
+
+    const checkWord = (): void => {
+        if(letters.join('') === answer.toUpperCase()) {
+            correctWord(answer.toUpperCase());
+            setIsCorrect(true);
         }
     };
 
@@ -91,14 +99,19 @@ const Word: React.FC<WordProps> = ({ answer, question, lettersMap }) => {
                             value={letter}
                             onKeyDown={(e): void => handleKeyDown(e, index)}
                             onInput={(e): void => handleInput(e, index)}
+                            isCorrect={isCorrect}
                             ref={(el): void => { inputsRef.current[index] = el; }}
                         />
-                        <span>{nums[index]}</span>
+                        <span>{nums[index] ?? '*'}</span>
                     </div>
                 ))}
-                {letters.join('')}
             </div>
-            {!letters.some(l => l === '') && <div className={styles.checkWrapper}><button className={styles.check}>Проверить</button></div>}
+            {!letters.some(l => l === '') &&
+                !isCorrect &&
+                <div className={styles.checkWrapper}>
+                    <button className={styles.check} onClick={(): void => checkWord()}>Проверить</button>
+                </div>
+            }
             <p className={styles.question}>{question}</p>
         </div>
     );
