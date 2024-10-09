@@ -20,10 +20,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "rimraf docs/ && cpy \"build/**/*\" \"docs/\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://cuthere01.github.io/words-quest/",
+  "homepage": "https://con-med.ru/new-front-test/assets/react/",
   "eslintConfig": {
     "extends": [
       "react-app",
