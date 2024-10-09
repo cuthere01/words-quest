@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/new-front-test/assets/react/static/css/main.c5bedb3b.css",
-    "main.js": "/new-front-test/assets/react/static/js/main.96e43ea3.js",
-    "index.html": "/new-front-test/assets/react/index.html",
-    "main.c5bedb3b.css.map": "/new-front-test/assets/react/static/css/main.c5bedb3b.css.map",
-    "main.96e43ea3.js.map": "/new-front-test/assets/react/static/js/main.96e43ea3.js.map"
+    "main.css": "/words-quest/static/css/main.c5bedb3b.css",
+    "main.js": "/words-quest/static/js/main.96e43ea3.js",
+    "index.html": "/words-quest/index.html",
+    "main.c5bedb3b.css.map": "/words-quest/static/css/main.c5bedb3b.css.map",
+    "main.96e43ea3.js.map": "/words-quest/static/js/main.96e43ea3.js.map"
   },
   "entrypoints": [
     "static/css/main.c5bedb3b.css",
